@@ -1,0 +1,36 @@
+name: Docker Compose Check
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+    # For run-on-demand
+
+jobs:
+  build_and_run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and run
+        run: docker compose up -d --build
+
+      - name: Check running containers
+        run: |
+          echo "Waiting for containers to start..."
+          sleep 30
+          docker compose ps
+          docker compose logs
+          curl localhost:80
+
+      - name: Cleanup
+        if: always()  # Ensure cleanup even if something else fails
+        run: docker compose down
