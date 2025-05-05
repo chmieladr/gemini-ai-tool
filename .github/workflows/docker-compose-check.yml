@@ -27,8 +27,8 @@ jobs:
         run: |
           echo "Waiting for containers to start..."
           sleep 30
-          docker-compose ps
-          docker-compose logs
+          docker compose ps
+          docker compose logs
           curl localhost:80
 
       - name: Cleanup
