@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
     <title>Gemini AI Tool</title>
+    <link rel="stylesheet" href="static/css/styles.css">
 </head>
 <body>
-    <div id="response-container">Waiting for response...</div>
+    <div>
+        <label for="prompt-input">Enter your prompt:</label>
+        <br>
+        <textarea id="prompt-input" placeholder="Enter your prompt here..." rows="5" cols="50"></textarea>
+        <br>
+        <button id="submit-prompt">Send</button>
+    </div>
+    <div id="response-container"></div>
 
     <script src="static/js/response.js"></script>
 </body>
