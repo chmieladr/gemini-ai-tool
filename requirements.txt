@@ -1,3 +1,5 @@
-flask
+flask[async]
+google
+google-genai
 gunicorn
 python-dotenv
