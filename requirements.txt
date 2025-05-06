@@ -1,3 +1,5 @@
 flask
+google
+google-genai
 gunicorn
 python-dotenv
