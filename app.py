@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, request
 
+from form import HelpdeskForm
 from gemini import GeminiClient
 
 app = Flask(__name__)
