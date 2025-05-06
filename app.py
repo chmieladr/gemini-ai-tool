@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, render_template
 
 from gemini import GeminiClient
 
@@ -12,10 +12,16 @@ api_key = os.getenv("GEMINI_API_KEY")
 client = GeminiClient(api_key=api_key)
 
 
-@app.route('/')
-def hello_world():  # put application's code here
-    response = client.generate_response("Explain how AI works in a few words")
+@app.route('/get_response')
+def get_response():
+    prompt = "Explain how AI works in a few words"
+    response = client.generate_response(prompt)
     return response
+
+
+@app.route('/')
+def hello_world():
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
