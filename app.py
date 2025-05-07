@@ -14,6 +14,13 @@ api_key = os.getenv("GEMINI_API_KEY")
 client = GeminiClient(api_key=api_key)
 
 
+@app.route('/get_form_state')
+def get_form_state():
+    form_state = client.get_form_state()
+    app.logger.info(f"Current form state: {form_state}")
+    return form_state
+
+
 @app.route('/get_response')
 def get_response():
     prompt = request.args.get('prompt')

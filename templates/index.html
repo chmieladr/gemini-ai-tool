@@ -5,15 +5,26 @@
     <link rel="stylesheet" href="static/css/styles.css">
 </head>
 <body>
-    <div>
-        <label for="prompt-input">Enter your prompt:</label>
-        <br>
-        <textarea id="prompt-input" placeholder="Enter your prompt here..." rows="5" cols="50"></textarea>
-        <br>
-        <button id="submit-prompt">Send</button>
+    <div id="chat-panel">
+        <div>
+            <label for="prompt-input">Enter your prompt:</label>
+            <br>
+            <textarea id="prompt-input" placeholder="Enter your prompt here..." rows="5" cols="50"></textarea>
+            <br>
+            <button id="submit-prompt">Send</button>
+        </div>
+        <div id="conversation"></div>
     </div>
-    <div id="conversation"></div>
-
+    <div class="form-panel">
+            <h3>Form Status</h3>
+            <div id="form-state">
+                <p>First Name: <span id="firstname"></span></p>
+                <p>Last Name: <span id="lastname"></span></p>
+                <p>Email: <span id="email"></span></p>
+                <p>Reason of Contact: <span id="reason_of_contact"></span></p>
+                <p>Urgency: <span id="urgency"></span></p>
+            </div>
+        </div>
     <script src="static/js/chat.js"></script>
 </body>
 </html>
