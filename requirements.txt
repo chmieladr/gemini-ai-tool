@@ -1,5 +1,7 @@
+email-validator
 flask[async]
 google
 google-genai
 gunicorn
+pydantic
 python-dotenv

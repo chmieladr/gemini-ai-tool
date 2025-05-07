@@ -4,7 +4,6 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, request
 
-from form import HelpdeskForm
 from gemini import GeminiClient
 
 app = Flask(__name__)
@@ -13,6 +12,13 @@ app.logger.setLevel(logging.INFO)
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 client = GeminiClient(api_key=api_key)
+
+
+@app.route('/get_form_state')
+def get_form_state():
+    form_state = client.get_form_state()
+    app.logger.info(f"Current form state: {form_state}")
+    return form_state
 
 
 @app.route('/get_response')

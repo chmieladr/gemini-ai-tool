@@ -5,6 +5,21 @@ from form import HelpdeskForm
 
 system_instruction = """
     You are a helpful assistant. Your goal is to help the user fill out a helpdesk form.
+
+    At the end of every single response you make,
+    always print the complete current form status as a JSON object in exactly the following format:
+    ```json
+    {
+        "firstname": "John",
+        "lastname": "Doe",
+        "email": "johndoe@gmail.com",
+        "reason_of_contact": "Technical issue",
+        "urgency": 6
+    }
+    ```
+
+    Replace values in the JSON with the actual data provided by the user.
+    Fields without provided data yet should contain empty strings.
 """
 
 
@@ -34,12 +49,14 @@ class GeminiClient:
         self.add_message(prompt, role="user")
 
         response = self.client.models.generate_content(
-            model=self.model, contents=self.conversation
+            model=self.model, config=self.config, contents=self.conversation
         )
 
         if response:
-            self.add_message(response.text, role="model")
-            return response.text
+            txt = response.text
+            self.add_message(txt, role="model")
+            self.update_form(txt)
+            return txt.split('```json')[0].strip()
         raise Exception("No response from Gemini!")
 
     def add_message(self, message: str, role: str = "user"):
@@ -52,3 +69,11 @@ class GeminiClient:
                 parts=[types.Part.from_text(text=message)]
             )
         )
+
+    def get_form_state(self) -> dict:
+        return self.form.model_dump()
+
+    def update_form(self, response: str):
+        if '```json' in response:
+            json_str = response.split('```json')[1].split('```')[0].strip()
+            self.form.update_from_json(json_str)
