@@ -7,11 +7,18 @@ from flask import Flask, render_template, request
 from gemini import GeminiClient
 
 app = Flask(__name__)
-app.logger.setLevel(logging.INFO)
+app.config.from_object('config.Config')
+if app.config['DEBUG']:
+    app.logger.setLevel(logging.INFO)
 
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
-client = GeminiClient(api_key=api_key)
+client = GeminiClient(
+    api_key=api_key,
+    model=app.config['GEMINI_MODEL'],
+    temperature=app.config['GEMINI_TEMPERATURE'],
+    system_instruction=app.config['SYSTEM_INSTRUCTION']
+)
 
 
 @app.route('/get_form_state')
