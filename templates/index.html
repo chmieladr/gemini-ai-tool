@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Gemini AI Tool</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}">
+</head>
+<body>
+<div class="container">
+    <div id="chat-panel">
+        <div id="conversation"></div>
+        <div id="chat-input">
+            <div id="chat-header">
+                <label for="prompt-input">  Talk to assistant</label>
+                <button id="submit-prompt">Send</button>
+            </div>
+            <br>
+            <textarea id="prompt-input" placeholder="Enter your prompt..." rows="5" cols="50"></textarea>
+        </div>
+    </div>
+    <div class="form-panel">
+        <h2>Form status</h2>
+        <ul>
+            <li><strong>First name: </strong><span id="firstname"></span></li>
+            <li><strong>Last name: </strong><span id="lastname"></span></li>
+            <li><strong>E-mail: </strong><span id="email"></span></li>
+            <li><strong>Reason of contact: </strong><span id="reason_of_contact"></span></li>
+            <li><strong>Urgency: </strong><span id="urgency"></span></li>
+        </ul>
+        <div style="height: 20px;"></div>
+        <button id="submit-form">Submit</button>
+    </div>
+</div>
+<script src="static/js/chat.js"></script>
+</body>
+</html>

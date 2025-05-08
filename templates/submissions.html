@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <title>Submissions | Gemini AI Tool</title>
+    <link rel="stylesheet" href="static/css/list.css">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}">
+</head>
+<body>
+    <h1>Submissions</h1>
+
+    {% if submissions %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>E-mail</th>
+                    <th>Reason of contact</th>
+                    <th>Urgency</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for submission in submissions %}
+                    <tr>
+                        <td>{{ submission.id }}</td>
+                        <td>{{ submission.firstname }}</td>
+                        <td>{{ submission.lastname }}</td>
+                        <td>{{ submission.email }}</td>
+                        <td>{{ submission.reason_of_contact }}</td>
+                        <td>{{ submission.urgency }}</td>
+                        <td>{{ submission.timestamp }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="no-submissions">No form submissions found.</p>
+    {% endif %}
+</body>
+</html>

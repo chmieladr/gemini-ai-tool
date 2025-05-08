@@ -8,12 +8,9 @@ __pycache__/
 # Virtual environment
 venv/
 
-# .env file
-.env
-
-# SQLite instance
-instance/
-*.db
+# Git (we don't need it in the Docker image)
+.git/
+.gitignore
 
 # Operating system-specific files
 .DS_Store
