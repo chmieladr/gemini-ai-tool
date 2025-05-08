@@ -13,7 +13,12 @@ if app.config['DEBUG']:
 
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
-client = GeminiClient(api_key=api_key)
+client = GeminiClient(
+    api_key=api_key,
+    model=app.config['GEMINI_MODEL'],
+    temperature=app.config['GEMINI_TEMPERATURE'],
+    system_instruction=app.config['SYSTEM_INSTRUCTION']
+)
 
 
 @app.route('/get_form_state')
