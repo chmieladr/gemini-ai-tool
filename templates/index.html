@@ -5,26 +5,29 @@
     <link rel="stylesheet" href="static/css/styles.css">
 </head>
 <body>
+<div class="container">
     <div id="chat-panel">
-        <div>
-            <label for="prompt-input">Enter your prompt:</label>
-            <br>
-            <textarea id="prompt-input" placeholder="Enter your prompt here..." rows="5" cols="50"></textarea>
-            <br>
-            <button id="submit-prompt">Send</button>
-        </div>
         <div id="conversation"></div>
+        <div id="chat-input">
+            <div id="chat-header">
+                <label for="prompt-input">  Talk to assistant</label>
+                <button id="submit-prompt">Send</button>
+            </div>
+            <br>
+            <textarea id="prompt-input" placeholder="Enter your prompt..." rows="5" cols="50"></textarea>
+        </div>
     </div>
     <div class="form-panel">
-            <h3>Form Status</h3>
-            <div id="form-state">
-                <p>First Name: <span id="firstname"></span></p>
-                <p>Last Name: <span id="lastname"></span></p>
-                <p>Email: <span id="email"></span></p>
-                <p>Reason of Contact: <span id="reason_of_contact"></span></p>
-                <p>Urgency: <span id="urgency"></span></p>
-            </div>
-        </div>
-    <script src="static/js/chat.js"></script>
+        <h2>Form status</h2>
+        <ul>
+            <li><strong>First name: </strong><span id="firstname"></span></li>
+            <li><strong>Last name: </strong><span id="lastname"></span></li>
+            <li><strong>E-mail: </strong><span id="email"></span></li>
+            <li><strong>Reason of contact: </strong><span id="reason_of_contact"></span></li>
+            <li><strong>Urgency: </strong><span id="urgency"></span></li>
+        </ul>
+    </div>
+</div>
+<script src="static/js/chat.js"></script>
 </body>
 </html>
