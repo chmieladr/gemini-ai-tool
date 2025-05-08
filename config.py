@@ -1,6 +1,7 @@
 class Config:
     DEBUG = False
     TESTING = False
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///forms.db'
 
     # Gemini AI configuration
     GEMINI_MODEL = "gemini-2.5-pro-exp-03-25"

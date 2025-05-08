@@ -1,5 +1,6 @@
 email-validator
 flask[async]
+flask-sqlalchemy
 google
 google-genai
 gunicorn

@@ -4,12 +4,18 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, request
 
+from database import FormSubmission, db
 from gemini import GeminiClient
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
 if app.config['DEBUG']:
     app.logger.setLevel(logging.INFO)
+
+# Database init
+db.init_app(app)
+with app.app_context():
+    db.create_all()
 
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
