@@ -64,9 +64,9 @@ def submit_form():
 
 
 @app.route('/submissions')
-def get_submissions():
+def view_submissions():
     submissions = FormSubmission.query.all()
-    return jsonify([sub.to_dict() for sub in submissions])
+    return render_template('submissions.html', submissions=submissions)
 
 
 @app.route('/')
