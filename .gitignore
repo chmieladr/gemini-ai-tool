@@ -10,3 +10,7 @@ venv/
 
 # .env file
 .env
+
+# SQLite instance
+instance/
+*.db

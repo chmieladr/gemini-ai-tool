@@ -2,14 +2,20 @@ import logging
 import os
 
 from dotenv import load_dotenv
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 
+from database import FormSubmission, db
 from gemini import GeminiClient
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
 if app.config['DEBUG']:
     app.logger.setLevel(logging.INFO)
+
+# Database init
+db.init_app(app)
+with app.app_context():
+    db.create_all()
 
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
@@ -35,6 +41,32 @@ def get_response():
 
     response = client.generate_response(prompt)
     return response
+
+
+@app.route('/submit_form', methods=['POST'])
+def submit_form():
+    try:
+        form_data = request.json
+        submission = FormSubmission(
+            firstname=form_data.get('firstname'),
+            lastname=form_data.get('lastname'),
+            email=form_data.get('email'),
+            reason_of_contact=form_data.get('reason_of_contact'),
+            urgency=form_data.get('urgency')
+        )
+        db.session.add(submission)
+        db.session.commit()
+        return jsonify({"success": True, "id": submission.id})
+    except Exception as e:
+        app.logger.error(f"Couldn't submit the form: {str(e)}")
+        db.session.rollback()
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/submissions')
+def get_submissions():
+    submissions = FormSubmission.query.all()
+    return jsonify([sub.to_dict() for sub in submissions])
 
 
 @app.route('/')
